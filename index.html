@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="shortcut icon" href="./clock.svg" type="image/vnd.microsoft.icon"/>
+    <link rel="stylesheet" href="style.css" >
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="clock-container">
+            <div class="timers">
+                <div class="second"></div>
+                <div class="minute"></div>
+                <div class="hour"></div>
+                <div class="axis"></div>
+            </div>
+            <img src="./clock.svg" alt="Clock Base">
+        </div>
+    </div>
+    <script>
+        var currentSec = getSecondsToday();
+
+        var seconds = (currentSec / 60) % 1;
+        var minutes = (currentSec / 3600) % 1;
+        var hours = (currentSec / 43200) % 1;
+
+        setTime(60 * seconds, "second");
+        setTime(3600 * minutes, "minute");
+        setTime(43200 * hours, "hour");
+
+        function setTime(left, hand) {
+            $("." + hand).css("animation-delay", "" + left * -1 + "s");
+        }
+
+        function getSecondsToday() {
+        let now = new Date();
+
+        let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+        let diff = now - today; 
+            return Math.round(diff / 1000);
+        }
+    </script>
+</body>
+</html>
+
